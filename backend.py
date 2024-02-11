@@ -1,4 +1,4 @@
-from flask import Flask, make_response, request, jsonify
+from flask import Flask, current_app, request, jsonify
 #from flask_restful import Resource, Api
 
 app = Flask(__name__)
@@ -28,6 +28,10 @@ def submit_answer():
         return "Correct!"
     else:
         return "Incorrect. The correct answer is: " + correct_answer
+
+@app.route("/")
+def init():
+    return current_app.send_static_file("index.html")
 
 app.run(port = 3001)
 if __name__ == '__main__':
