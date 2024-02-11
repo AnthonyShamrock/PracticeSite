@@ -1,4 +1,4 @@
-from flask import Flask, current_app, request, jsonify
+from flask import Flask, render_template, request, jsonify
 #from flask_restful import Resource, Api
 
 app = Flask(__name__)
@@ -31,7 +31,7 @@ def submit_answer():
 
 @app.route("/")
 def init():
-    return current_app.send_static_file("index.html")
+    return render_template("index.html")
 
 app.run(port = 3001)
 if __name__ == '__main__':
