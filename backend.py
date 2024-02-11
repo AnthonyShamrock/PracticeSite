@@ -13,8 +13,8 @@ questions = {
 
 @app.route('/get', methods=['GET'])
 def get():
-  #question_id = request.args.get('id') or 1
-  return "TEST"
+  question_id = request.args.get('id') or 1
+  return jsonify(questions[question_id])
 
 @app.route('/submit', methods=['POST'])
 def submit_answer():
@@ -33,7 +33,7 @@ def submit_answer():
 def init():
     return render_template("index.html")
 
-app.run(port = 3001)
+
 if __name__ == '__main__':
-   # app.run()
+    app.run(port = 3001)
     print("up")
