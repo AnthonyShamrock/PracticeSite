@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, jsonify
-#from flask_restful import Resource, Api
+import pymysql
+import math
 
 app = Flask(__name__)
-#api = Api(app)
 
 # Mock database with questions and answers
 questions = {
@@ -11,10 +11,14 @@ questions = {
     3: {"question": "Who painted the Mona Lisa?", "answer": "Leonardo da Vinci"}
 }
 
+db = pymysql.connect(host="localhost", user="cisco", password="WombatCisco", database="PracticeSite")
+
+
 @app.route('/get', methods=['GET'])
 def get():
-  question_id = request.args.get('id') or 1
-  return jsonify(questions[question_id]["question"])
+  cursor = db.cursor()
+  cursor.execute("SELECT 1 FROM Questions")
+  return jsonify(cursor.fetchone())
 
 @app.route('/submit', methods=['POST'])
 def submit_answer():
