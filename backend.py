@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request, jsonify
-#from flask_restful import Resource, Api
 
 app = Flask(__name__)
-#api = Api(app)
 
 # Mock database with questions and answers
 questions = {
