@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, jsonify
 import pymysql
-import math
 
 app = Flask(__name__)
 
