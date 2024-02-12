@@ -25,6 +25,5 @@ form.addEventListener('submit', async (e) => {
 window.addEventListener('load', async () => {
   const response = await fetch('/get');
   const question = await response.text();
-  console.log(question  )
   document.getElementById('questionLabel').textContent = question;
 });

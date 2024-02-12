@@ -14,7 +14,7 @@ questions = {
 @app.route('/get', methods=['GET'])
 def get():
   question_id = request.args.get('id') or 1
-  return jsonify(questions[question_id])
+  return jsonify(questions[question_id]["question"])
 
 @app.route('/submit', methods=['POST'])
 def submit_answer():
