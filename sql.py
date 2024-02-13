@@ -1,3 +1,7 @@
+# # # # # # # # # # # # #
+#  TESTING SQL PROGRAM  #
+# # # # # # # # # # # # #
+
 import sqlite3
  
 connection = sqlite3.connect("website.db")
