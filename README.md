@@ -5,13 +5,13 @@ vision: potential CTF
 
 
 languages:
-Python
-JavaScript
-SQL
-HTML
-CSS
+- Python
+- JavaScript
+- SQL
+- HTML
+- CSS
 
 Packages:
-Flask
-sqlite3
-random
+- Flask
+- sqlite3
+- random
