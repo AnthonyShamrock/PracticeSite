@@ -39,12 +39,11 @@ def submit_answer():
     data = request.get_json()
     cursor.execute("SELECT answer FROM questions WHERE id = ?", (data["id"],))
     correctAnswer = cursor.fetchone()[0]
+    connection.close()
 
     if data['answer'] == correctAnswer:
-        connection.close()
         return "Correct!"
     else:
-        connection.close()
         return "Incorrect. The correct answer is: " + correctAnswer
 
 @app.route("/add", methods=['POST'])
