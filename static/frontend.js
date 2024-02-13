@@ -1,4 +1,5 @@
 const form = document.getElementById('questionForm');
+var questionId = 0
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -14,16 +15,18 @@ form.addEventListener('submit', async (e) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ id: 1, answer: answer }) // Change id value accordingly
+    body: JSON.stringify({ id: questionId, answer: answer }) // Change id value accordingly
   });
   
   const result = await response.text();
   // Display result to user
-  console.log(result);
+  alert(result)
+  location.reload()
 });
 
 window.addEventListener('load', async () => {
   const response = await fetch('/get');
-  const question = await response.text();
-  document.getElementById('questionLabel').textContent = question;
+  const payload = JSON.parse(await response.text());
+  questionId = payload.id
+  document.getElementById('questionLabel').textContent = payload.question;
 });

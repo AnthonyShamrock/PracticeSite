@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
-import pymysql
+import sqlite3
+import random
 
 app = Flask(__name__)
 
@@ -10,33 +11,56 @@ questions = {
     3: {"question": "Who painted the Mona Lisa?", "answer": "Leonardo da Vinci"}
 }
 
-db = pymysql.connect(host="localhost", user="cisco", password="WombatCisco", database="PracticeSite")
-
+connection = sqlite3.connect("website.db")
+cursor = connection.cursor()
+connection.commit()
 
 @app.route('/get', methods=['GET'])
 def get():
-  cursor = db.cursor()
-  cursor.execute("SELECT 1 FROM Questions")
-  return jsonify(cursor.fetchone())
+  connection = sqlite3.connect("website.db")
+  cursor = connection.cursor()
+  if request.content_type == "application/json":
+    data = request.get_json()
+    cursor.execute("SELECT id,question FROM questions WHERE id = ?", (data["id"],))
+  else:
+    cursor.execute("SELECT id,question FROM questions")
+  getQuestions = cursor.fetchall()
+  selectedQuestion = getQuestions[random.randint(0, len(getQuestions)-1)]
+  connection.close()
+  return jsonify({"id": selectedQuestion[0], "question": selectedQuestion[1]})
 
 @app.route('/submit', methods=['POST'])
 def submit_answer():
-    print(request)
+    if request.content_type != "application/json":
+       return {"Success": False, "Message": 'Content_Type != "application/json"'}, 400
+    connection = sqlite3.connect("website.db")
+    cursor = connection.cursor()
+
     data = request.get_json()
-    question_id = data['id']
-    user_answer = data['answer']
-    correct_answer = questions[int(question_id)]["answer"]
-    
-    if user_answer == correct_answer:
+    cursor.execute("SELECT answer FROM questions WHERE id = ?", (data["id"],))
+    correctAnswer = cursor.fetchone()[0]
+
+    if data['answer'] == correctAnswer:
+        connection.close()
         return "Correct!"
     else:
-        return "Incorrect. The correct answer is: " + correct_answer
+        connection.close()
+        return "Incorrect. The correct answer is: " + correctAnswer
+
+@app.route("/add", methods=['POST'])
+def add_question():
+    if request.content_type != "application/json":
+        return {"Success": False, "Message": 'Content_Type != "application/json"'}, 400
+    connection = sqlite3.connect("website.db")
+
+    data = request.get_json()
+    connection.execute("INSERT INTO questions (question, answer) VALUES(?, ?)", (data["question"], data["answer"]))
+    connection.commit()
+    return {"Success": True, "Message": 'Added'}
 
 @app.route("/")
 def init():
     return render_template("index.html")
 
-
 if __name__ == '__main__':
     app.run(port = 3001)
-    print("up")
