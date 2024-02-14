@@ -1,12 +1,19 @@
 const form = document.getElementById('questionForm');
 var questionId = 0
 
+// Get new question and display it
+async function getQuestion() {
+  const response = await fetch('/get');
+  const payload = JSON.parse(await response.text());
+  questionId = payload.id
+  document.getElementById('questionLabel').textContent = payload.question;
+}
+
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   
   const answer = document.getElementById('questionAnswerField').value;
 
-  console.log(answer)
   if (answer === null) {
     return
   }
@@ -15,18 +22,14 @@ form.addEventListener('submit', async (e) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ id: questionId, answer: answer }) // Change id value accordingly
+    body: JSON.stringify({ id: questionId, answer: answer })
   });
   
   const result = await response.text();
+
   // Display result to user
   alert(result)
-  location.reload()
+  getQuestion()
 });
 
-window.addEventListener('load', async () => {
-  const response = await fetch('/get');
-  const payload = JSON.parse(await response.text());
-  questionId = payload.id
-  document.getElementById('questionLabel').textContent = payload.question;
-});
+window.addEventListener('load', getQuestion);
