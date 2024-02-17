@@ -63,9 +63,14 @@ def add_question():
 @app.route("/isDeveloper", methods=['POST'])
 def isDeveloper():
    if request.content_type != "application/json":
+        print(request.content_type)
         return {"Success": False, "Message": 'Content_Type != "application/json"'}, 400
    
-   return {"Success": True, "Message": 'User is Developer'}
+   data = request.get_json()
+   if data["secret"] == "wombat":
+      return {"Success": True, "Message": 'User is Developer'}
+   
+   return {"Success": False, "Message": 'Unauthorized User'}, 401
 
 @app.route("/")
 @app.route("/<pageName>")

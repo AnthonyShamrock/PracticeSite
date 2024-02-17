@@ -21,7 +21,7 @@ document.getElementById('questionForm').addEventListener('submit', async (e) => 
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ id: questionId, answer: answer })
+    JSON: JSON.stringify({ id: questionId, answer: answer })
   });
   
   const result = await response.text();
