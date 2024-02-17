@@ -61,9 +61,9 @@ def add_question():
 def renderAdd():
     return render_template("addQuestion.html")
 
-@app.route("/test")
+@app.route("/development")
 def renderTest():
-    return render_template("test.html")
+    return render_template("development.html")
 
 @app.route("/")
 @app.route("/getQuestion")
