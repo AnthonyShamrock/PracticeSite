@@ -1,6 +1,6 @@
 var questionId = 0
 
-// Get new question and display it
+// Get new question and display it!
 async function getQuestion() {
   const response = await fetch('/get');
   const payload = JSON.parse(await response.text());
