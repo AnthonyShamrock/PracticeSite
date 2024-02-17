@@ -1,5 +1,15 @@
 var questionId = 0
 
+console.log(localStorage.getItem("IsDeveloper"))
+if (!localStorage.getItem("IsDeveloper")) {
+  if (prompt("You are entering the development area! Please enter totally secured password!") == "true") {
+    localStorage.setItem("IsDeveloper", true)
+  }
+}
+
+if (!localStorage.getItem("IsDeveloper")) {
+  location.replace(window.location.origin)
+}
 // Get new question and display it
 async function getQuestion() {
   const response = await fetch('/get');

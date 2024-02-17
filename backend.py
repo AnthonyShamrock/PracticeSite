@@ -57,9 +57,18 @@ def add_question():
     connection.commit()
     return {"Success": True, "Message": 'Added'}
 
+@app.route("/addQuestion")
+def renderAdd():
+    return render_template("addQuestion.html")
+
+@app.route("/test")
+def renderTest():
+    return render_template("test.html")
+
 @app.route("/")
-def init():
-    return render_template("index.html")
+@app.route("/getQuestion")
+def renderGet():
+    return render_template("getQuestion.html")
 
 if __name__ == '__main__':
     app.run(port = 3001)
