@@ -67,10 +67,10 @@ def isDeveloper():
    
    return {"Success": True, "Message": 'User is Developer'}
 
+@app.route("/")
 @app.route("/<pageName>")
-def run(pageName):
-    print(pageName, "{}.html".format(escape(pageName)))
-    if os.path.exists("templates/{}.html".format(escape(pageName))):
+def run(pageName=None):
+    if pageName and os.path.exists("templates/{}.html".format(escape(pageName))):
         return render_template("{}.html".format(escape(pageName)))
     return render_template("getQuestion.html")
 
