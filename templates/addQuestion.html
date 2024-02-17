@@ -15,14 +15,16 @@
     <a href="/development">Development</a>
   </div>
   <main>
-    <form id="questionForm">
-      <label id="questionLabel"></label> <br>
-      <input type="text" id="questionAnswerField" required></input><br>
+    <form id="addQuestionForm,">
+      <label for="question" id="questionLabel"></label>Question<br>
+      <input type="text" id="questionInput" name="question" required></input><br>
+      <br>
+      <label for="answer" id="answerLabel"></label>Answer<br>
+      <input type="text" id="answerInput" name="answer" required></input><br>
       <button type="submit">Submit</button>
     </form>
   </main>
-  <script type=text/javascript src="{{url_for('static', filename='frontend.js')}}"></script>
-  <!--<script type="module" src="frontend.js"></script>-->
+  <script type=text/javascript src="{{url_for('static', filename='addQuestion.js')}}"></script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 from markupsafe import escape
 import sqlite3
 import random
@@ -6,30 +6,28 @@ import os
 
 app = Flask(__name__)
 
-# Mock database with questions and answers
-questions = {
-    1: {"question": "What is 2 + 2?", "answer": "4"},
-    2: {"question": "What is the capital of France?", "answer": "Paris"},
-    3: {"question": "Who painted the Mona Lisa?", "answer": "Leonardo da Vinci"}
-}
-
+## SQL initialization
 connection = sqlite3.connect("website.db")
 cursor = connection.cursor()
 connection.commit()
 
 @app.route('/get', methods=['GET'])
 def get():
+  # SQL
   connection = sqlite3.connect("website.db")
   cursor = connection.cursor()
+
+  # Check if json, possible id?
   if request.content_type == "application/json":
     data = request.get_json()
     cursor.execute("SELECT id,question FROM questions WHERE id = ?", (data["id"],))
   else:
-    cursor.execute("SELECT id,question FROM questions")
+    cursor.execute("SELECT id,question FROM questions") # Random question
+
   getQuestions = cursor.fetchall()
   selectedQuestion = getQuestions[random.randint(0, len(getQuestions)-1)]
   connection.close()
-  return jsonify({"id": selectedQuestion[0], "question": selectedQuestion[1]})
+  return {"id": selectedQuestion[0], "question": selectedQuestion[1]}
 
 @app.route('/submit', methods=['POST'])
 def submit_answer():
@@ -68,7 +66,7 @@ def isDeveloper():
    
    data = request.get_json()
    if data["secret"] == "wombat":
-      return {"Success": True, "Message": 'User is Developer'}
+      return {"Success": True, "Message": 'User is Developer', "Key": str(random.random())}
    
    return {"Success": False, "Message": 'Unauthorized User'}, 401
 
