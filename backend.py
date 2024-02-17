@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, jsonify
+from markupsafe import escape
 import sqlite3
 import random
+import os
 
 app = Flask(__name__)
 
@@ -57,17 +59,19 @@ def add_question():
     connection.commit()
     return {"Success": True, "Message": 'Added'}
 
-@app.route("/addQuestion")
-def renderAdd():
-    return render_template("addQuestion.html")
 
-@app.route("/development")
-def renderTest():
-    return render_template("development.html")
+@app.route("/isDeveloper", methods=['POST'])
+def isDeveloper():
+   if request.content_type != "application/json":
+        return {"Success": False, "Message": 'Content_Type != "application/json"'}, 400
+   
+   return {"Success": True, "Message": 'User is Developer'}
 
-@app.route("/")
-@app.route("/getQuestion")
-def renderGet():
+@app.route("/<pageName>")
+def run(pageName):
+    print(pageName, "{}.html".format(escape(pageName)))
+    if os.path.exists("templates/{}.html".format(escape(pageName))):
+        return render_template("{}.html".format(escape(pageName)))
     return render_template("getQuestion.html")
 
 if __name__ == '__main__':

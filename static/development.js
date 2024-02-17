@@ -1,13 +1,12 @@
 var questionId = 0
 
-console.log(localStorage.getItem("IsDeveloper"))
-if (!localStorage.getItem("IsDeveloper")) {
+if (!sessionStorage.getItem("IsDeveloper")) {
   if (prompt("You are entering the development area! Please enter totally secured password!") == "true") {
-    localStorage.setItem("IsDeveloper", true)
+    sessionStorage.setItem("IsDeveloper", true)
   }
 }
 
-if (!localStorage.getItem("IsDeveloper")) {
+if (!sessionStorage.getItem("IsDeveloper")) {
   location.replace(window.location.origin)
 }
 // Get new question and display it
