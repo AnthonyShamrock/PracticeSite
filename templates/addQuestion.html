@@ -14,16 +14,25 @@
     <a href="/addQuestion" class="active">Add Question</a>
     <a href="/development">Development</a>
   </div>
+
   <main>
-    <form id="addQuestionForm,">
-      <label for="question" id="questionLabel"></label>Question<br>
+    <form id="addQuestionForm">
+      <label for="category">Pick Category</label><br>
+      <input list="categoryList" name="category" required autocomplete="off">
+      <datalist id = "categoryList"></datalist>
+      <br>
+      
+      <label for="question">Question</label><br>
       <input type="text" id="questionInput" name="question" required></input><br>
       <br>
-      <label for="answer" id="answerLabel"></label>Answer<br>
+
+      <label for="answer">Answer</label><br>
       <input type="text" id="answerInput" name="answer" required></input><br>
       <button type="submit">Submit</button>
+
     </form>
   </main>
+
   <script type=text/javascript src="{{url_for('static', filename='addQuestion.js')}}"></script>
 </body>
 

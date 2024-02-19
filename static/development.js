@@ -13,33 +13,27 @@ async function postData(url="", data={}) {
   return response.json();
 }
 
-async function getData(url="") {
+async function getData(url="") { // make this work URL data
   const response = await fetch(url);
   return response.json();
 }
 
 // Check if user is developer; if not then return.
-function init() {
-  if (sessionStorage.getItem("IsDeveloper")) {
-    postData("/isDeveloper", {secret: prompt("You are entering the development area! Please enter the password.")})
-    .then((r) =>{
-      if (r["Success"] == true) {
-        sessionStorage.setItem("IsDeveloper", true)
-        location.replace(window.location.href)
-      }
-      else {
-        location.replace(window.location.origin)
-      }
-    })
-  }
-  return true
-}
-init()
-if (sessionStorage.getItem("IsDeveloper") != true){location.replace(window.location.origin)} else {document.getElementById("html").removeAttribute("hidden")}
+getData("/user/currentUser")
+  .then((r)=>{
+    if (r["Success"] & r["Username"]=="admin") {
+      document.getElementById("html").removeAttribute("hidden")
+    }
+    else {
+      console.log("Failed", getData("/user/currentUser"));
+      location.replace("/login");
+    }
+  })
+  .catch((e) => {})
 
 // Get new question and display it
 function getQuestion() {
-  getData("/get")
+  getData("/get/question")
   .then(
     payload =>{
     questionId = payload.id;

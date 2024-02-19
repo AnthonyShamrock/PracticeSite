@@ -1,4 +1,9 @@
-var questionId = 0
+// assignments
+var categoryList = document.getElementById("categoryList")
+
+
+// testing assignments
+var exampleOptions=["test", "programming"]; // TODO: Connect to backend and get categories from SQL
 
 // HTTP handler
 async function postData(url="", data={}) {
@@ -23,36 +28,13 @@ async function getData(url="", data={}) {
   return response.json();
 }
 
+// Get categories for questions (Self-Invoking function)
+(function() {
+  exampleOptions.forEach(function (item) {
+    var option = document.createElement("option");
+    option.value = item;
+    categoryList.appendChild(option);
+  })
+})();
 
-// Get new question and display it!
-async function getQuestion() {
-  const response = await fetch('/get');
-  const payload = JSON.parse(await response.text());
-  questionId = payload.id
-  document.getElementById('questionLabel').textContent = payload.question;
-}
-
-document.getElementById('questionForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  
-  const answer = document.getElementById('questionAnswerField').value;
-
-  if (answer === null) {
-    return
-  }
-  const response = await fetch('/submit', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    JSON: JSON.stringify({ id: questionId, answer: answer })
-  });
-  
-  const result = await response.text();
-
-  // Display result to user
-  alert(result)
-  getQuestion()
-});
-
-window.addEventListener('load', getQuestion);
+//window.addEventListener('load', getOptions);
