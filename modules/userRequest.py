@@ -39,8 +39,10 @@ def login():
             if password == encrypt(escape(request.form["Password"])): 
                 session["Username"] = escape(request.form["Username"])
             else:
-                return redirect("/login?error=true")
-        return redirect("/")
+                return {"Success": False, "Message": "Invalid credentials"}
+        return {"Success": True, "Message": "welcome!"}
+    
+    # Get Method, redirects them
     return redirect("/login")
 
 def currentUser():

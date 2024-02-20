@@ -1,10 +1,31 @@
+/* 
+Dark/Mixed - 100: #121212 For body background color
+
+Dark/Mixed - 200: #282828 For cards background color
+
+Dark/Mixed - 300: #3f3f3f For chips buttons, dropdowns background color
+
+Dark/Mixed - 400: #575757 For sidebars, navbar background color
+
+Dark/Mixed - 500: #717171 For modal, dialogs background color
+
+Dark/Mixed - 600: #8b8b8b For on background texts color
+
+https://colorffy.com/dark-theme-generator
+*/
+
+body {
+    background-color: #121212;
+    color: #8b8b8b;
+}
+
 .topbar {
-    background-color: grey;
+    background-color: #575757;
+    border-radius: 5px;
     display: flex;
 }
 .topbar a {
-    float: left;
-    display: block;
+    display: inline-block;
     color: white;
     padding: 14px 15px;
     text-align: center;
@@ -13,36 +34,11 @@
 }
 
 .topbar a.active{
-    background-color: plum;
-    color: black;
+    background-color: #a688fa;
+    border-radius: 2px;
+    color: #282828;
 }
 .topbar a:hover {
-    background-color: aquamarine;
-    color: white
-}
-
-
-/* Popup thing */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.3);
-    padding-top: 60px;
-}
-
-.model-content {
-    background-color: #fefefe;
-    margin: 5px auto;
-    border: 1px solid #888;
-    width: 80%;
-}
-
-.container {
-    padding: 16px;
+    background-color: #7a5af5;
+    color: #282828
 }

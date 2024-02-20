@@ -62,6 +62,7 @@ def user(requestType=None):
   # Execute function in getRequest module
   return getattr(userRequest, escape(requestType))()
 
+# MOVING SOON!
 @app.route('/submit', methods=['POST'])
 def submit_answer():
     if request.content_type != "application/json":
@@ -79,6 +80,7 @@ def submit_answer():
     else:
         return "Incorrect. The correct answer is: " + correctAnswer
 
+# MOVING SOON!
 @app.route("/add", methods=['POST'])
 def add_question():
     if request.content_type != "application/json":
