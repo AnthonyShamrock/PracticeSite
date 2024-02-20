@@ -5,7 +5,7 @@ ALLOWED_USER_REQUEST_PATHS=[] # This autopopulate based off the module userReque
 
 ## Packages
 from inspect import isfunction, getmodule # Used to get functions for APIs
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, current_app, url_for
 from werkzeug.middleware.proxy_fix import ProxyFix
 from markupsafe import escape
 import os
@@ -19,6 +19,7 @@ import modules.sql as sql
 ## Start app
 app = Flask(__name__)
 app.secret_key = "wombat.netTESTING" ## For sessions
+app.SERVER_NAME = "localhost"
 app.wsgi_app = ProxyFix(
     app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
 )
@@ -105,4 +106,4 @@ def run(pageName=None):
     return render_template("getQuestion.html")
 
 if __name__ == '__main__':
-    app.run(port = 3001, use_reloader=False)
+    app.run(port = 3001)
