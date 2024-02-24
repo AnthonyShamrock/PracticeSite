@@ -3,7 +3,7 @@ from markupsafe import escape
 import random
 from modules.sql import sql 
 
-## All functions here will allowed in path for site/get/FUNCTION_NAME
+## All functions here will allowed in path for site/question/FUNCTION_NAME
 
 ## Setup database
 with sql() as db:
