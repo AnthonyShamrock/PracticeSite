@@ -20,7 +20,7 @@ async function getData(url="") {
 
 // Get new question and display it!
 function getQuestion() {
-  getData("/get")
+  getData("/question/get")
   .then(
     payload =>{
     questionId = payload.id;

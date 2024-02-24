@@ -1,5 +1,5 @@
 ## CONSTANTS (UPPER_SNAKE_CASE)
-ALLOWED_GET_REQUEST_PATHS=[] # This autopopulate based off the module getRequest
+ALLOWED_QUESTION_REQUEST_PATHS=[] # This autopopulate based off the module getRequest
 ALLOWED_USER_REQUEST_PATHS=[] # This autopopulate based off the module userRequest
 
 
@@ -12,7 +12,7 @@ import os
 
 
 ## Modules
-import modules.getRequest as getRequest
+import modules.questionRequest as questionRequest
 import modules.userRequest as userRequest
 import modules.sql as sql
 
@@ -34,24 +34,24 @@ type: {categories | question}
 id: {type: question?}
 '''
 
-# populates ALLOWED_GET_REQUEST_PATHS with function names
-ALLOWED_GET_REQUEST_PATHS = getFunctionsFromModule(getRequest)
+# populates ALLOWED_QUESTION_REQUEST_PATHS with function names
+ALLOWED_QUESTION_REQUEST_PATHS = getFunctionsFromModule(questionRequest)
 
-@app.route('/get/<string:requestType>', methods=['GET']) ## Make request data send over URL with URL
+@app.route('/question/<string:requestType>', methods=['GET', "POST"]) ## Make request data send over URL with URL
 def get(requestType=None):
   # Guard Clause: Ensure request has requestType
   if not requestType:
        return {"Success": False, "Message": 'Missing requestType'}, 400
   
   # List Validation: Check if requestType is in (CONSTANT) ALLOWED_GET_REQUEST_PATHS
-  if not requestType in ALLOWED_GET_REQUEST_PATHS:
+  if not requestType in ALLOWED_QUESTION_REQUEST_PATHS:
       return {"Success": False, "Message": 'invalid requestType'}, 400
   
   # Execute function in getRequest module
-  return getattr(getRequest, escape(requestType))()
+  return getattr(questionRequest, escape(requestType))()
 
 
-# populates ALLOWED_USER_REQUEST_PATHS
+# populates ALLOWED_USER_REQUEST_PATHS with function names
 ALLOWED_USER_REQUEST_PATHS = getFunctionsFromModule(userRequest)
 
 @app.route('/user/<string:requestType>', methods=['GET', 'POST']) ## Make request data send over URL with URL

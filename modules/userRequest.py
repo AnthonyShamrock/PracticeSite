@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, jsonify
 from markupsafe import escape
 import random,os,hashlib
 from modules.sql import sql
@@ -14,7 +14,7 @@ if __name__ == "__main__":
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT UNIQUE,
             password TEXT NOT NULL,
-         isAdmin BOOL DEFAULT 0);
+            isAdmin BOOLEAN DEFAULT 0);
         ''')
     finally:
         db.close()
@@ -26,20 +26,32 @@ def encrypt(data):
  return hashlib.sha256("{}WOMBATNET".format(str(data)).encode()).hexdigest()
 
 
+def register():
+    # Guard Clause: Ensure only POST request pass
+    if request.method != "POST":
+        return {"Success": False, "Message": "Improper method used"}, 400
+    db = sql()
+    
+    db.close()
+
 # Login to user!
 def login():
     db = sql()
     
     if request.method == "POST":
-        if db.execute("SELECT username, password FROM users where username=?", (escape(request.form["Username"]),)).fetchone() == None:
+        if db.execute("SELECT username, password FROM users where username=?", (escape(request.form["Username"]),)).fetchone() == None: # Check if username exists
             db.execute("INSERT INTO users (username, password) VALUES(?,?)", (escape(request.form["Username"]),encrypt(escape(request.form["Password"]))))
             session["Username"] = escape(request.form["Username"])
         else:
-            password = db.execute("SELECT password FROM users where username=?", (escape(request.form["Username"]),)).fetchone()[0]
-            if password == encrypt(escape(request.form["Password"])): 
+            userInformation = db.execute("SELECT password, isAdmin FROM users where username=?", (escape(request.form["Username"]),)).fetchone()#[0]
+            db.close()
+            if userInformation[0] == encrypt(escape(request.form["Password"])): 
                 session["Username"] = escape(request.form["Username"])
+                if userInformation[1] == 1:
+                    session["isAdmin"] = True
             else:
                 return {"Success": False, "Message": "Invalid credentials"}
+            
         return {"Success": True, "Message": "welcome!"}
     
     # Get Method, redirects them
@@ -47,7 +59,8 @@ def login():
 
 def currentUser():
     if request.method == "POST":
-       return {"Success": False, "Message": "Improper method used"}
+       return {"Success": False, "Message": "Improper method used"}, 400
     if session.get("Username", None):
+        print(session)
         return {"Success": True, "Username": session["Username"]}
     return {"Success": False, "Message": "Not logged in!"}

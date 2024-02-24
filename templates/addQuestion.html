@@ -16,17 +16,16 @@
   </div>
 
   <main>
-    <form id="addQuestionForm">
-      <label for="category">Pick Category</label><br>
-      <input list="categoryList" name="category" required autocomplete="off">
-      <datalist id = "categoryList"></datalist>
-      <br>
-      
-      <label for="question">Question</label><br>
-      <input type="text" id="questionInput" name="question" required></input><br>
+    <form id="addQuestionForm" method="post">
+      <label>Pick Category</label><br>
+      <select id = "categoryList" name="category" required autocomplete="off"><option disabled selected></option></select>
       <br>
 
-      <label for="answer">Answer</label><br>
+      <label>Question</label><br>
+      <input type="text" id="questionInput" name="question" required></input>
+      <br>
+
+      <label>Answer</label><br>
       <input type="text" id="answerInput" name="answer" required></input><br>
       <button type="submit">Submit</button>
 
