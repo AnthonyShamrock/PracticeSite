@@ -93,5 +93,5 @@ def run(pageName=None):
     return render_template("getQuestion.html")
 
 if __name__ == '__main__':
-    app.permanent_session_lifetime = 20 #21600 # Automatically log off after 6 hours!
+    app.permanent_session_lifetime = 21600 # Automatically log off after 6 hours!
     app.run(port = 3001)
