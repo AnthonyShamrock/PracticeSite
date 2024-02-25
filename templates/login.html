@@ -26,7 +26,7 @@
       <input type="text" name="Username" placeholder="Enter username" required><br>
       <br>
       <label for="Password"><b>Password:</b></label><br>
-      <input type="password" name="Password" placeholder="Enter password" required readonly onfocus="this.removeAttribute('readonly');"><br>
+      <input type="password" name="Password" placeholder="Enter password" required readonly onfocus="this.removeAttribute('readonly');" onsubmit="hash(this.value).then(e=>{console.log(e); this.value = e})"><br>
       <br>
       <div id="errorlabel" hidden>Invalid credentials</div>
       <button type="submit">Login</button>

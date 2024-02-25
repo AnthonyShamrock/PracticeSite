@@ -1,9 +1,4 @@
 // assignments
-var categoryList = document.getElementById("categoryList")
-
-
-// testing assignments
-var exampleOptions=["test", "programming"]; // TODO: Connect to backend and get categories from SQL
 
 // HTTP handler
 async function postData(url="", data={}, formData=false) {
@@ -41,21 +36,51 @@ async function getData(url="") {
   })
 })();*/
 
+getData("/user/currentUser")
+  .then(payload => {
+    if (!payload.Success) {
+      return location.href = "/login"
+    }
+  })
+  .catch(()=>{})
+
+function toggleErrorLabel(status=false, message=null) {
+  if (message) {
+    document.getElementById('errorlabel').textContent = message
+  }
+  if (status) {
+    document.getElementById('errorlabel').removeAttribute('hidden')
+    setTimeout(toggleErrorLabel, 5000)
+  }
+  else {
+    document.getElementById('errorlabel').setAttribute('hidden', "")
+  }
+  return true
+}
+
 // Get categories for questions (Self-Invoking function)
 (function() {
-  exampleOptions.forEach(function (item) {
-    categoryList.options.add(new Option(item, item));
-  })
+  getData("/question/categories")
+    .then(payload => {
+      if (payload.Success) {
+        payload["Categories"].forEach(function (item) {
+          document.getElementById("categoryList").options.add(new Option(item, item));
+        })
+      }
+    })
+    .catch(()=>{
+      document.getElementById("categoryList").options.add(new Option("ERROR"));
+    })
 })();
 
 document.getElementById("addQuestionForm").addEventListener("submit", event => {
   event.preventDefault();
   postData("/question/add", document.getElementById("addQuestionForm"), true)
   .then(r=>{
-    console.log(r)
+    toggleErrorLabel(true, r.Message)
   })
   .catch(()=>{
-    console.log("ERROR")
+    toggleErrorLabel(true, "Error Occured!")
   })
 });
 

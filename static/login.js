@@ -27,6 +27,13 @@ async function getData(url="") {
   return response.json();
 }
 
+async function hash() {
+  return await crypto.subtle.digest("SHA-256", new TextEncoder().encode(this)).then(hashbuffer => {
+    return Array.from(new Uint8Array(hashbuffer)).map((b) => b.toString(16).padStart(2, '0')).join('');
+  })
+};
+
+
 function toggleErrorLabel(status=false) {
   if (status) {
     document.getElementById('errorlabel').removeAttribute('hidden')
@@ -38,25 +45,33 @@ function toggleErrorLabel(status=false) {
   return true
 }
 
-document.getElementById("login").addEventListener("submit", event => {
+document.getElementById("login").addEventListener("submit", async event => {
   event.preventDefault();
+  // if fail revert to this text
+  revertText = document.getElementsByName('Password')[0].value
+
+  // hash password for transport
+  await hash(document.getElementsByName('Password')[0].value)
+    .then(e=>{
+      document.getElementsByName('Password')[0].value = e
+    })
+  
+  // Submit passwokrd
   postData("/user/login", document.getElementById("login"), true)
   .then(r=>{
-    console.log(r)
     if (r["Success"]) {
       if (document.referrer != '') {
-        history.back()
+        return history.back()
       }
       location.replace("/")
     }
     else {
       toggleErrorLabel(true)
-      
     }
   })
   .catch(()=>{
     toggleErrorLabel(true)
   })
-  //return false
-  //document.getElementsByName("Username"))[0].Value
+  document.getElementsByName('Password')[0].value = revertText
+  revertText = null
 });

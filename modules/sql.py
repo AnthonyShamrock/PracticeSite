@@ -23,7 +23,12 @@ class sql():
             print(f"Error executing query: {e}")
             self.connection.rollback()
             raise sqlite3.Error
+        except Exception as e:
+            print(f"Error executing query: {e}")
+            self.connection.rollback()
+            raise Exception
         return returnStatement
+        
     
     def close(self):
         self.connection.close()

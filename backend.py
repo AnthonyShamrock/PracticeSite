@@ -10,7 +10,6 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 from markupsafe import escape
 import os
 
-
 ## Modules
 import modules.questionRequest as questionRequest
 import modules.userRequest as userRequest
@@ -85,18 +84,6 @@ def submit_answer():
     else:
         return "Incorrect. The correct answer is: " + correctAnswer
 
-# MOVING SOON!
-@app.route("/add", methods=['POST'])
-def add_question():
-    if request.content_type != "application/json":
-        return {"Success": False, "Message": 'Content_Type != "application/json"'}, 400
-    connection = None;#sqlite3.connect("website.db")
-
-    data = request.get_json()
-    connection.execute("INSERT INTO questions (question, answer) VALUES(?, ?)", (data["question"], data["answer"]))
-    connection.commit()
-    return {"Success": True, "Message": 'Added'}
-
 # Handle serve all static pages! :D
 @app.route("/")
 @app.route("/<string:pageName>")
@@ -106,4 +93,5 @@ def run(pageName=None):
     return render_template("getQuestion.html")
 
 if __name__ == '__main__':
+    app.permanent_session_lifetime = 20 #21600 # Automatically log off after 6 hours!
     app.run(port = 3001)

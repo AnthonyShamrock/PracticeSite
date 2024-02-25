@@ -5,17 +5,20 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   <title>Practice site</title>
-  <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{url_for('static', filename='main.css')}}" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
-  <div class="topbar">
-    <a href="/getQuestion">Get Question</a>
-    <a href="/addQuestion" class="active">Add Question</a>
-    <a href="/development">Development</a>
-  </div>
+  <ul class="sidebarNav">
+    <li><a href="/login">Login</a></li>
+    <li><a href="/getQuestion">Get Question</a></li>
+    <li><a href="/addQuestion" class="active">Add Question</a></li>
+    <li><a href="/development">Development</a></li>
+    <div style="text-align: center;"><br>
+      Made with ❤️!
+    </div>
+  </ul>
 
-  <main>
+  <main class="center" style="margin-left:25%;padding:1px 16px">
     <form id="addQuestionForm" method="post">
       <label>Pick Category</label><br>
       <select id = "categoryList" name="category" required autocomplete="off"><option disabled selected></option></select>
@@ -27,6 +30,7 @@
 
       <label>Answer</label><br>
       <input type="text" id="answerInput" name="answer" required></input><br>
+      <div id="errorlabel" hidden>Invalid credentials</div>
       <button type="submit">Submit</button>
 
     </form>

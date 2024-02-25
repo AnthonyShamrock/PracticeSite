@@ -1,0 +1,121 @@
+/* 
+Dark/Mixed - 100: #121212 For body background color
+
+Dark/Mixed - 200: #282828 For cards background color
+
+Dark/Mixed - 300: #3f3f3f For chips buttons, dropdowns background color
+
+Dark/Mixed - 400: #575757 For sidebars, navbar background color
+
+Dark/Mixed - 500: #717171 For modal, dialogs background color
+
+Dark/Mixed - 600: #8b8b8b For on background texts color
+
+https://colorffy.com/dark-theme-generator
+*/
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #121212;
+    color: white;
+    size: 100% 100%;
+}
+
+main {
+    width: auto;
+    height: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.center {
+    padding: 0 0;
+    text-align: center;
+}
+
+#errorlabel {
+    color: white; 
+    background-color: #717171; 
+    padding: 15px;
+    border-radius: 5px;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 2%;
+}
+
+form {
+    display: flexbox;
+    background-color: #282828;
+    border-radius: 2%;
+    height: 40%;
+    width: 40%;
+    position: static;
+    margin-left: 25%;
+    margin-top: 10%;
+    padding: 1% 1%;
+}
+
+form input {
+    color: white;
+    background-color: #717171;
+    width: 80%;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    border: 0px;
+    margin: 8px 0;
+}
+
+form input:hover {
+    border-bottom: 5px solid #ba9ffb;
+    border-radius: 8px;
+}
+
+button {
+    padding: 15px 15%;
+    border-radius: 5px;
+    background-color: #a688fa;
+    color: #211938;
+    border: none;
+    font-weight: bold;
+}
+button:hover{
+    opacity: 0.8;
+}
+
+.sidebarNav {
+    list-style-type: none;
+    position: absolute;
+    height: 99%;
+    width: 15%;
+    margin: 0;
+    padding: 0;
+    border-radius: 10px;
+    background-color: #3f3f3f;
+    overflow: auto;
+}
+
+.sidebarNav a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px;
+}
+
+.sidebarNav a.active{
+    background-color: #a688fa;
+    color: #211938;
+    border-radius: 5px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: auto;
+    margin-left: 50%;
+    text-align: center;
+}

@@ -31,7 +31,7 @@ def register():
     if request.method != "POST":
         return {"Success": False, "Message": "Improper method used"}, 400
     db = sql()
-    
+
     db.close()
 
 # Login to user!
@@ -43,11 +43,12 @@ def login():
             db.execute("INSERT INTO users (username, password) VALUES(?,?)", (escape(request.form["Username"]),encrypt(escape(request.form["Password"]))))
             session["Username"] = escape(request.form["Username"])
         else:
-            userInformation = db.execute("SELECT password, isAdmin FROM users where username=?", (escape(request.form["Username"]),)).fetchone()#[0]
+            userInformation = db.execute("SELECT password, id, isAdmin FROM users where username=?", (escape(request.form["Username"]),)).fetchone()#[0]
             db.close()
             if userInformation[0] == encrypt(escape(request.form["Password"])): 
                 session["Username"] = escape(request.form["Username"])
-                if userInformation[1] == 1:
+                session["UserId"] = userInformation[1]
+                if userInformation[2] == 1:
                     session["isAdmin"] = True
             else:
                 return {"Success": False, "Message": "Invalid credentials"}
@@ -57,10 +58,10 @@ def login():
     # Get Method, redirects them
     return redirect("/login")
 
+# Get CurrentUser
 def currentUser():
     if request.method == "POST":
        return {"Success": False, "Message": "Improper method used"}, 400
     if session.get("Username", None):
-        print(session)
-        return {"Success": True, "Username": session["Username"]}
+        return {"Success": True, "Username": session["Username"], "UserId": session["UserId"]}
     return {"Success": False, "Message": "Not logged in!"}
