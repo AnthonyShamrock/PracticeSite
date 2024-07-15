@@ -5,7 +5,7 @@ from modules.sql import sql
 
 
 ## All functions here will allowed in path for site/user/FUNCTION_NAME
-
+ 
 ## Setup database
 if __name__ == "__main__":
     db = sql()

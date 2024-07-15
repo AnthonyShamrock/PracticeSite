@@ -23,7 +23,7 @@ with sql() as db:
          FOREIGN KEY (category) REFERENCES categories(name),
          FOREIGN KEY (addedBy) REFERENCES users(id)
         )''')
-
+ 
 # Get random question or question via ID
 def get():
     # Guard Clause: Prevent unauthorized methods to pass
@@ -57,7 +57,6 @@ def add():
     # Context Manager: automatically close DB connection after
     with sql() as db:
         try:
-            print(session)
             db.execute("INSERT INTO questions (question, answer, category, addedBy) VALUES (?,?,?,?)", (escape(request.form["question"]), escape(request.form["answer"]), escape(request.form["category"]), int(session["UserId"])))
             return {"Success": True, "Message": "Question added"}
         except:
@@ -90,7 +89,6 @@ def submit():
             returnMsg = "Server error"
             data = request.get_json()
             answer = db.execute("SELECT answer FROM questions WHERE id = ?", (escape(data["id"],))).fetchone()[0]
-            db.close()
             if data["answer"] == answer:
                 returnMsg  = "Correct"
             else:
