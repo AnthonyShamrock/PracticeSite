@@ -1,5 +1,5 @@
 ## CONSTANTS (UPPER_SNAKE_CASE)
-ALLOWED_QUESTION_REQUEST_PATHS=[] # This autopopulate based off the module getRequest
+ALLOWED_QUESTION_REQUEST_PATHS=[] # This autopopulate based off the module questionRequest
 ALLOWED_USER_REQUEST_PATHS=[] # This autopopulate based off the module userRequest
 
 
