@@ -27,8 +27,8 @@ async function getData(url="") {
   return response.json();
 }
 
-async function hash() {
-  return await crypto.subtle.digest("SHA-256", new TextEncoder().encode(this)).then(hashbuffer => {
+async function hash(text) {
+  return await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text)).then(hashbuffer => {
     return Array.from(new Uint8Array(hashbuffer)).map((b) => b.toString(16).padStart(2, '0')).join('');
   })
 };

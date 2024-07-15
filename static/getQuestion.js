@@ -39,6 +39,7 @@ document.getElementById('questionForm').addEventListener('submit', async (e) => 
   postData("/question/submit", {id: questionId, answer: answer})
   .then(payload => {
     alert(payload.Message)
+    getQuestion()
   })
   /*
   const response = await fetchS('/submit', {
@@ -53,7 +54,7 @@ document.getElementById('questionForm').addEventListener('submit', async (e) => 
 
   // Display result to user
   alert(result)*/
-  getQuestion()
+  //getQuestion()
 });
 
 window.addEventListener('load', getQuestion);

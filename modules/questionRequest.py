@@ -89,7 +89,6 @@ def submit():
         try:
             returnMsg = "Server error"
             data = request.get_json()
-            print(1)
             answer = db.execute("SELECT answer FROM questions WHERE id = ?", (escape(data["id"],))).fetchone()[0]
             if data["answer"] == answer:
                 returnMsg  = "Correct"
