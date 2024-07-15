@@ -40,7 +40,7 @@ def get():
         else:
             getQuestions = db.execute("SELECT id,question,category,addedBy FROM questions").fetchall()
             selectedQuestion = getQuestions[random.randint(0, len(getQuestions)-1)]
-            print(selectedQuestion)
+            #print(selectedQuestion)
     
     return {"id": selectedQuestion[0], "question": selectedQuestion[1], "Category": selectedQuestion[2]}
 
@@ -78,3 +78,23 @@ def categories():
             return {"Success": True, "Categories": returnTable}
         except:
             return {"Success": False, "Message": "Error Occured"}, 400
+        
+def submit():
+     # Guard Clause: Prevent unauthorized methods to pass
+    if request.method != "POST":
+        return {"Success": False, "Message": "Improper method used"}, 400
+
+     # Context Manager: automatically close DB connection after
+    with sql() as db:
+        try:
+            returnMsg = "Server error"
+            data = request.get_json()
+            print(1)
+            answer = db.execute("SELECT answer FROM questions WHERE id = ?", (escape(data["id"],))).fetchone()[0]
+            if data["answer"] == answer:
+                returnMsg  = "Correct"
+            else:
+                returnMsg = "Incorrect. The correct answer is: "+answer
+            return {"Success": True, "Message": returnMsg}
+        except:
+             return {"Success": False, "Message": "Error Occured"}, 400

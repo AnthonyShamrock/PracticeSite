@@ -36,11 +36,12 @@ document.getElementById('questionForm').addEventListener('submit', async (e) => 
   if (answer === null) {
     return
   }
-  postData("/submit", {id: questionId, answer: answer})
+  postData("/question/submit", {id: questionId, answer: answer})
   .then(payload => {
-    alert(payload)
+    alert(payload.Message)
   })
-  const response = await fetch('/submit', {
+  /*
+  const response = await fetchS('/submit', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -51,7 +52,7 @@ document.getElementById('questionForm').addEventListener('submit', async (e) => 
   const result = await response.text();
 
   // Display result to user
-  alert(result)
+  alert(result)*/
   getQuestion()
 });
 

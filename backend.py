@@ -66,24 +66,6 @@ def user(requestType=None):
   # Execute function in getRequest module
   return getattr(userRequest, escape(requestType))()
 
-# MOVING SOON!
-@app.route('/submit', methods=['POST'])
-def submit_answer():
-    if request.content_type != "application/json":
-       return {"Success": False, "Message": 'Content_Type != "application/json"'}, 400
-    connection = None;#sqlite3.connect("website.db")
-    cursor = connection.cursor()
-
-    data = request.get_json()
-    cursor.execute("SELECT answer FROM questions WHERE id = ?", (data["id"],))
-    correctAnswer = cursor.fetchone()[0]
-    connection.close()
-
-    if data['answer'] == correctAnswer:
-        return "Correct!"
-    else:
-        return "Incorrect. The correct answer is: " + correctAnswer
-
 # Handle serve all static pages! :D
 @app.route("/")
 @app.route("/<string:pageName>")
