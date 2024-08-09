@@ -37,7 +37,6 @@ def register():
 # Login to user!
 def login():
     db = sql()
-    
     if request.method == "POST":
         if db.execute("SELECT username, password FROM users where username=?", (escape(request.form["Username"]),)).fetchone() == None: # Check if username exists
             db.execute("INSERT INTO users (username, password) VALUES(?,?)", (escape(request.form["Username"]),encrypt(escape(request.form["Password"]))))

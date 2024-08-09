@@ -1,0 +1,44 @@
+/* 
+Dark/Mixed - 100: #121212 For body background color
+
+Dark/Mixed - 200: #282828 For cards background color
+
+Dark/Mixed - 300: #3f3f3f For chips buttons, dropdowns background color
+
+Dark/Mixed - 400: #575757 For sidebars, navbar background color
+
+Dark/Mixed - 500: #717171 For modal, dialogs background color
+
+Dark/Mixed - 600: #8b8b8b For on background texts color
+
+https://colorffy.com/dark-theme-generator
+*/
+
+body {
+    background-color: #121212;
+    color: #8b8b8b;
+}
+
+.topbar {
+    background-color: #575757;
+    border-radius: 5px;
+    display: flex;
+}
+.topbar a {
+    display: inline-block;
+    color: white;
+    padding: 14px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topbar a.active{
+    background-color: #a688fa;
+    border-radius: 2px;
+    color: #282828;
+}
+.topbar a:hover {
+    background-color: #7a5af5;
+    color: #282828
+}

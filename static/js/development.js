@@ -1,23 +1,9 @@
 var questionId = 0
 
-// HTTP handler
-async function postData(url="", data={}) {
-  const response = await fetch(url, {
-    method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-  });
-  
-  return response.json();
-}
+import {getData, postData} from "./modules/httpHandler.js"
+import "./modules/sidebar.js" // Load Sidebar
 
-async function getData(url="") { // make this work URL data
-  const response = await fetch(url);
-  return response.json();
-}
-
+//loadSidebarNav()
 // Check if user is developer; if not then return.
 getData("/user/currentUser")
   .then((r)=>{

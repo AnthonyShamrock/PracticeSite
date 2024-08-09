@@ -1,0 +1,26 @@
+.sidebarNav {
+    top: 0; /* Navigation bar stays at top, removes gap */
+    z-index: 1; /* Nothing can overlap sidebar */
+    list-style-type: none;
+    position: absolute;
+    height: 99%;
+    width: 15%;
+    margin: 5px 5px 5px 0px;
+    padding: 1px;
+    border-radius: 10px;  /* Corner radius of region */
+    background-color: #3f3f3f;  /* Color */
+    overflow: auto; 
+}
+
+.sidebarNav a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px;
+}
+
+.sidebarNav a.active{ 
+    background-color: #a688fa;
+    color: #211938;
+    border-radius: 5px;
+}

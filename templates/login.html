@@ -5,20 +5,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   <title>Practice site</title>
-  <link href="{{url_for('static', filename='login.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{url_for('static', filename='css/login.css')}}" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  <ul class="sidebarNav">
-    <li><a href="/login" class="active">Login</a></li>
-    <li><a href="/getQuestion">Get Question</a></li>
-    <li><a href="/addQuestion">Add Question</a></li>
-    <li><a href="/development">Development</a></li>
-    <div style="text-align: center;"><br>
-      Made with ❤️!
-    </div>
-  </ul>
+  <nav class="sidebarNav"></nav>
 
-  
   <main class="center" style="margin-left:25%;padding:1px 16px">
     <form autocomplete="off" id="login" action="/user/login" method="post">
       <h1>Login</h1>
@@ -26,14 +17,14 @@
       <input type="text" name="Username" placeholder="Enter username" required><br>
       <br>
       <label for="Password"><b>Password:</b></label><br>
-      <input type="password" name="Password" placeholder="Enter password" required readonly onfocus="this.removeAttribute('readonly');" onsubmit="hash(this.value).then(e=>{console.log(e); this.value = e})"><br>
+      <input type="password" name="Password" placeholder="Enter password" required readonly onfocus="this.removeAttribute('readonly');"><br>
       <br>
       <div id="errorlabel" hidden>Invalid credentials</div>
       <button type="submit">Login</button>
     </form> 
   </main>
   
-  <script src="{{url_for('static', filename='login.js')}}"></script>
+  <script type=module src="{{url_for('static', filename='js/login.js')}}"></script>
 </body>
 
 </html>

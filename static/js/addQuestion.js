@@ -1,31 +1,6 @@
 // assignments
-
-// HTTP handler
-async function postData(url="", data={}, formData=false) {
-  if (formData) {
-    const response = await fetch(url, {
-      method: 'POST',
-       headers: {
-         'Content-Type': 'application/x-www-form-urlencoded'
-       },
-        body: new URLSearchParams(new FormData(data))
-    });
-    return response.json();
-  }
-  const response = await fetch(url, {
-    method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-  });
-  return response.json();
-}
-
-async function getData(url="") {
-  const response = await fetch(url);
-  return response.json();
-}
+import {getData, postData} from "./modules/httpHandler.js"
+import "./modules/sidebar.js" // Load Sidebar
 
 // OLD: Get categories for questions (Self-Invoking function)
 /*(function() {
@@ -75,8 +50,9 @@ function toggleErrorLabel(status=false, message=null) {
 
 document.getElementById("addQuestionForm").addEventListener("submit", event => {
   event.preventDefault();
-  postData("/question/add", document.getElementById("addQuestionForm"), true)
+  postData("/question/add", document.getElementById("addQuestionForm")) //, true
   .then(r=>{
+    console.log(r)
     toggleErrorLabel(true, r.Message)
   })
   .catch(()=>{

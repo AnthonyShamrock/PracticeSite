@@ -5,21 +5,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   <title>Practice site</title>
-  <link href="{{url_for('static', filename='main.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet" type="text/css" /> <!--main.css-->>
 </head>
 <body>
-  <ul class="sidebarNav">
-    <li><a href="/login">Login</a></li>
-    <li><a href="/getQuestion">Get Question</a></li>
-    <li><a href="/addQuestion" class="active">Add Question</a></li>
-    <li><a href="/development">Development</a></li>
-    <div style="text-align: center;"><br>
-      Made with ❤️!
-    </div>
-  </ul>
+  <nav class="sidebarNav"></nav>
 
-  <main class="center" style="margin-left:25%;padding:1px 16px">
-    <form id="addQuestionForm" method="post">
+  <main class="center">
+    <form id="addQuestionForm" method="post" autocomplete="off">
       <label>Pick Category</label><br>
       <select id = "categoryList" name="category" required autocomplete="off"><option disabled selected></option></select>
       <br>
@@ -36,7 +28,7 @@
     </form>
   </main>
 
-  <script type=text/javascript src="{{url_for('static', filename='addQuestion.js')}}"></script>
+  <script type=module src="{{url_for('static', filename='js/addQuestion.js')}}"></script>
 </body>
 
 </html>
