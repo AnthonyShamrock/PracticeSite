@@ -1,7 +1,10 @@
+// assignments
+import {getData, postData} from "./modules/httpHandler.js"
+import "./modules/sidebar.js" // Load Sidebar
 var questionId = 0
 
 // HTTP handler
-async function postData(url="", data={}) {
+/*async function postData(url="", data={}) {
   const response = await fetch(url, {
     method: 'POST',
       headers: {
@@ -15,7 +18,7 @@ async function postData(url="", data={}) {
 async function getData(url="") {
   const response = await fetch(url);
   return response.json();
-}
+}*/
 
 
 // Get new question and display it!

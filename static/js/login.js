@@ -8,8 +8,9 @@ async function hash(text) {
 };
 
 
-function toggleErrorLabel(status=false) {
+function toggleErrorLabel(status=false, message="Invalid credentials") {
   if (status) {
+    document.getElementById('errorlabel').innerHTML = message
     document.getElementById('errorlabel').removeAttribute('hidden')
     setTimeout(toggleErrorLabel, 5000)
   }
@@ -37,7 +38,7 @@ document.getElementById("login").addEventListener("submit", async event => {
       location.replace("/")
     }
     else {
-      toggleErrorLabel(true)
+      toggleErrorLabel(true, r.Message)
     }
   })
   .catch(()=>{

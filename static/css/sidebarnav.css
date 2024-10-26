@@ -1,15 +1,12 @@
 .sidebarNav {
-    top: 0; /* Navigation bar stays at top, removes gap */
-    z-index: 1; /* Nothing can overlap sidebar */
-    list-style-type: none;
-    position: absolute;
-    height: 99%;
-    width: 15%;
-    margin: 5px 5px 5px 0px;
-    padding: 1px;
-    border-radius: 10px;  /* Corner radius of region */
+    display: flex;
+    flex-direction: column;
+    width: 15rem; /* X-axis size */
+    border-radius: 1rem;  /* Corner radius of region */
     background-color: #3f3f3f;  /* Color */
-    overflow: auto; 
+    margin: 0.25rem 0.25rem 0.25rem 0.25rem;
+    height: 100vh;
+    list-style-type: none;
 }
 
 .sidebarNav a {
