@@ -8,7 +8,7 @@ import "./modules/sidebar.js" // Load Sidebar
 getData("/user/currentUser")
   .then((r)=>{
     if (r["Success"] & r["Username"]=="admin") {
-      document.getElementById("html").removeAttribute("hidden")
+      document.getElementsByName("html").removeAttribute("hidden")
     }
     else {
       console.log("Failed", getData("/user/currentUser"));
@@ -19,15 +19,15 @@ getData("/user/currentUser")
 
 // Get new question and display it
 function getQuestion() {
-  getData("/get/question")
+  getData("/question/get")
   .then(
     payload =>{
     questionId = payload.id;
-    document.getElementById('questionLabel').textContent = payload.question;
+    //document.getElementById('questionLabel').textContent = payload.question;
   })
 }
 
-document.getElementById('questionForm').addEventListener('submit', async (e) => {
+/*document.getElementById('questionForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   
   const answer = document.getElementById('questionAnswerField').value;
@@ -40,6 +40,6 @@ document.getElementById('questionForm').addEventListener('submit', async (e) => 
 
   // Display result to user
   getQuestion()
-});
+});*/
 
 window.addEventListener('load', getQuestion);

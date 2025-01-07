@@ -8,11 +8,11 @@ export default (function() {
         // Highlight correct tab!
         const sidebarCollection = document.querySelector(".sidebarNav").children
         for (let i = 0; i < sidebarCollection.length; i++) {
-            if (sidebarCollection[i].firstChild.href == document.baseURI) {
-                sidebarCollection[i].firstChild.className = "active"
+            if (sidebarCollection[i].href == document.baseURI) {
+                sidebarCollection[i].className = "active"
             }
             else {
-                sidebarCollection[i].firstChild.className = ""
+                sidebarCollection[i].className = ""
             }
         }
     })

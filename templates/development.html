@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -6,16 +7,17 @@
   <link href="{{url_for('static',  filename='css/development.css')}}" rel="stylesheet" type="text/css" /> <!--main.css-->
 </head>
 
-<html hidden id="html">
 <body>
   <nav class="sidebarNav"> </nav>
-  <main>
+  <div class="content">
+    <h2>CATEGORY</h2>
     <div class="grid-container">
         <div class="grid-item">1</div>
         <div class="grid-item">2</div>
     </div>
-  </main>  
+  </div>
   <footer>test</footer>
 </body>
+
 <script type=module src="{{url_for('static', filename='js/development.js')}}"></script>
 </html>

@@ -4,9 +4,11 @@
     width: 15rem; /* X-axis size */
     border-radius: 1rem;  /* Corner radius of region */
     background-color: #3f3f3f;  /* Color */
-    margin: 0.25rem 0.25rem 0.25rem 0.25rem;
-    height: 100vh;
+    margin: 0.25rem;
+    height: calc(100vh - 1rem);
     list-style-type: none;
+    box-sizing: border-box;
+    overflow: auto; /* Ensure content is scrollable if it overflows */
 }
 
 .sidebarNav a {
